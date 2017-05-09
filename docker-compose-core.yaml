@@ -1,0 +1,20 @@
+---
+services:
+  cassandra:
+    image: cassandra
+  zookeeper:
+     image: wurstmeister/zookeeper
+     ports:
+       - "2181:2181"
+  kafka:
+    environment:
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+  memcached:
+    image: "memcached:alpine"
+
+version: "2"

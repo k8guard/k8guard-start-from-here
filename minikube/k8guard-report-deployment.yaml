@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-report-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: k8guard-report
+    spec:
+      containers:
+      - name: k8guard-report
+        image: local/k8guard-report
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            memory: 10Mi
+        env:
+          - name: K8GUARD_NAMESPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-namespace
+          - name: K8GUARD_CLUSTER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-cluster
+          - name: K8GUARD_ACTION_CASSANDRA_HOSTS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-hosts
+          - name: K8GUARD_ACTION_CASSANDRA_KEYSPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-keyspace
+        ports:
+        - containerPort: 3001

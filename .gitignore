@@ -1,0 +1,4 @@
+.idea
+.env
+.env-creds
+minikube/k8guard-action-secrets.yaml

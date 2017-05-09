@@ -1,0 +1,20 @@
+---
+services:
+  k8guard-action:
+    build:
+      context: ../k8guard-action/
+      dockerfile: Dockerfile-local
+    external_links:
+      - k8guardstartfromhere_kafka_1:kafka
+      - k8guardstartfromhere_cassandra_1:cassandra
+    networks:
+      - k8guardstartfromhere_default
+    env_file:
+      - .env
+      - .env-creds
+    volumes:
+      - ${HOME}/.kube:/root/.kube
+version: "2"
+networks:
+  k8guardstartfromhere_default:
+    external: true

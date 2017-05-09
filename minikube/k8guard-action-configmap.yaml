@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8guard-action-configmap
+data:
+  cluster-name: "minikube"
+  hipchat-room-id: ""
+  hipchat-base-url: ""
+  hipchat-tag-namespace-owner: "true"
+  k8guard-log-level: "debug"
+  k8guard-kafka-brokers: "k8guard-kafka-service.default.svc.cluster.local:9092"
+  k8guard-kafka-action-topic: "k8guard-to-action-k8s-lab"
+  cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
+  cassandra-keyspace: "k8guardkeyspace"
+  smtp-server: ""
+  smtp-port: "25"
+  smtp-send-from: "DO_NOT_REPLY@REPLACE_WITH_DOMAIN.COM"
+  smtp-fallback-send-to: "REPLACE@REPLACE_WITH_DOMAIN.COM"
+  smtp-send-to-namespace-owner: "true"
+  action-safe-mode: "true"
+  action-dry-run: "false"
+  action-duration-between-chat-notifications: "30s"
+  action-warning-count-before_action: "4"
+  action-duration-between-notifying-again: "24h"
+  action-duration-violation-expires: "120h"
