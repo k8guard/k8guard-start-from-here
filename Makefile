@@ -1,9 +1,10 @@
 developer-setup:
 	brew install glide
 	go get golang.org/x/tools/cmd/goimports
-	cd .. && git clone https://github.com/k8guard/k8guard-discover.git
-	cd .. && git clone https://github.com/k8guard/k8guard-action.git
-	cd .. && git clone https://github.com/k8guard/k8guard-report.git
+	cd .. && git clone https://github.com/k8guard/k8guardlibs.git && cd k8guardlibs && glide install
+	cd .. && git clone https://github.com/k8guard/k8guard-discover.git && cd k8guard-discover && make deps
+	cd .. && git clone https://github.com/k8guard/k8guard-action.git && cd k8guard-action && make deps
+	cd .. && git clone https://github.com/k8guard/k8guard-report.git && cd k8guard-report && make deps
 	cd ../k8guard-discover && ln -s $(pwd)/hooks/pre-commit .git/hooks/pre-commit
 	cd ../k8guard-action && ln -s $(pwd)/hooks/pre-commit .git/hooks/pre-commit
 	cd ../k8guard-report && ln -s $(pwd)/hooks/pre-commit .git/hooks/pre-commit
