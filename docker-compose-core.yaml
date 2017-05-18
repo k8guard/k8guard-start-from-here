@@ -1,7 +1,9 @@
 ---
 services:
   cassandra:
-    image: cassandra
+    image: bitnami/cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: cassandra
   zookeeper:
      image: wurstmeister/zookeeper
      ports:
