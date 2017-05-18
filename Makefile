@@ -3,10 +3,10 @@ developer-setup: setup-source create-hooks
 setup-source:
 	brew install glide
 	go get golang.org/x/tools/cmd/goimports
-	cd .. && git clone https://github.com/k8guard/k8guardlibs.git && cd k8guardlibs && make deps
-	cd .. && git clone https://github.com/k8guard/k8guard-discover.git && cd k8guard-discover && make deps
-	cd .. && git clone https://github.com/k8guard/k8guard-action.git && cd k8guard-action && make deps
-	cd .. && git clone https://github.com/k8guard/k8guard-report.git && cd k8guard-report && make deps
+	cd .. && (git clone https://github.com/k8guard/k8guardlibs.git || true) && cd k8guardlibs && make deps
+	cd .. && (git clone https://github.com/k8guard/k8guard-discover.git || true) && cd k8guard-discover && make deps
+	cd .. && (git clone https://github.com/k8guard/k8guard-action.git || true) && cd k8guard-action && make deps
+	cd .. && (git clone https://github.com/k8guard/k8guard-report.git || true) && cd k8guard-report && make deps
 	cp .env-creds-template .env-creds
 	cp .env-template .env
 
