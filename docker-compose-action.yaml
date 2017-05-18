@@ -10,8 +10,8 @@ services:
     networks:
       - k8guardstartfromhere_default
     env_file:
-      - .env
       - .env-creds
+      - .env
     volumes:
       - ${HOME}/.kube:/root/.kube
 version: "2"

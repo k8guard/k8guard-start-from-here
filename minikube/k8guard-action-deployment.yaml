@@ -36,6 +36,26 @@ spec:
               configMapKeyRef:
                 name: k8guard-action-configmap
                 key: cassandra-keyspace
+          - name: K8GUARD_ACTION_CASSANDRA_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-username
+          - name: K8GUARD_ACTION_CASSANDRA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-password
+          - name: K8GUARD_ACTION_CASSANDRA_CAPATH
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-ca-path
+          - name: K8GUARD_ACTION_CASSANDRA_SSL_HOST_VALIDATION
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-ssl-validation
           - name: K8GUARD_ACTION_SMTP_SERVER
             valueFrom:
               configMapKeyRef:
