@@ -7,9 +7,13 @@
 # Getting Started
 
 ## 1. Developer Setup
-* Clone this repo:
+	Make sure to setup your $GOPATH
+* Clone this repo (k8guard-start-from-here)
+	This path will be where you run all your commands !
 
 	```
+	mkdir -p $GOPATH/src/github.com/k8guard/
+	cd $GOPATH/src/github.com/k8guard/
 	git clone https://github.com/k8guard/k8guard-start-from-here.git
 	```
 	start-from-here repo is your where you wanna be, when running the project.
