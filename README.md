@@ -25,7 +25,7 @@
 	```
 	make developer-setup
 	```
-The above step will clone other repos for k8guard-discover,k8guard-action,k8guard-action, and install golang tools (glide, goimport) for you, and also will setup the pre-commits hooks. note: it uses brew to install glide for only for mac users currently.
+The above step will clone other repos (k8guardlibs, k8guard-discover, k8guard-action, k8guard-report), and install golang tools (glide, goimport) for you, and also will setup the pre-commits hooks. note: it uses brew to install glide for only for mac users currently.
 
 ## 2.Config and Credentials
 
