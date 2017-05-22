@@ -1,18 +1,17 @@
 
-## Table of Contents
+## K8Guard
 
 - [About K8Guard](#about)	 
   	- [Name](#name)
 	- [Features](#features)
 	- [Violations Examples](#violations-examples)
 	- [Design](#microservices)	  
-- What do you need?
 	- [Requirements](#requirements)	 
-- Build and Deploy
-	- [Developer Setup](#developer-setup)
+- How tos:
+	- [Developer setup](#developer-setup-first-time)
 	- [Build the project](build-the-project)
-	- [Deploy in Docker-compose](#run-in-docker-compose)
-	- [Deploy in Minikube](#run-in-minikube)
+	- [Deploy in docker-compose](#run-in-docker-compose)
+	- [Deploy in minikube](#run-in-minikube)
 
 
 ----
@@ -66,9 +65,8 @@
 ----
 
 
-# Deploy
 
-## 1. Developer Setup First Time
+# 1. Developer Setup First Time
 
 * Install Go and Setup your setup your `$GOPATH`.
 
@@ -94,9 +92,9 @@
 
 	* Hint 2: `Makefile` is your friend and it is better than this documentation. take a look at the Makefile in the root of this folder, to undrestand all the commands you need.
 
+---
 
-
-## 2. Build the project
+# 2. Build the project
 
 - To Build all the micro-services:
 
@@ -109,11 +107,13 @@
 		- ``` make build-report```
 
 
-## 3. Deploy locally
+---
+
+# 3. Deploy locally
 
 You can choose to either deploy in minikube or run in in docker-compose. all batteries are included (kafka, cassandra, memcached)
 
-###  Run in docker-compose
+##  Run in docker-compose
 
 1. Config :
 	edit `.env` and `env-creds` files. (default values should work fine.)
@@ -151,35 +151,27 @@ You can choose to either deploy in minikube or run in in docker-compose. all bat
     http://localhost:3001
     ```
 
-1. To stop/clean all your containers run:
+### Clean up docker-compose
 
-      ```
-      make clean
-      ```
-	- Hint alternatively, you can clean individual services:
+- To clean the docker-compose
 
-		`make clean-action`
+	```
+	make clean
+	```
 
-		`make clean-discover`
+- Hint alternatively, you can clean individual services:
 
-		`make clean-report`
+	`make clean-action`
 
-		`make clean-core`
+	`make clean-discover`
 
-##### Shortcut for build and run everything !
+	`make clean-report`
 
-This one is included just for fun:
-
-		```
-		make sup
-		```
-
-sup is short for super up ! it will do steps 3 and 4 in one terminal.
+	`make clean-core`
 
 
 
-
-### Run in minikube
+## Run in minikube
 Make sure you have installed minkube and edit the config maps and secrets inside the minikube folder for each service, and follow these steps:
 
 1. ```minikube start --kubernetes-version v1.5.1```
@@ -187,12 +179,21 @@ Make sure you have installed minkube and edit the config maps and secrets inside
 1. ```make deploy-minikube```
 
 
-Give it a couple minutes anod now you should be able to hit the service urls:
+Give it a couple minutes. and hit the service urls:
 
-- For discover service:
+- Get discover service url:
+
+    ``` minikube service k8guard-report-service ```
+
+- Get report service url:
 
     ``` minikube service k8guard-report-service ```
 
-- For report service:
 
-    ``` minikube service k8guard-report-service ```
+
+### Clean up minikube
+To delete the deployment in minikube:
+
+```
+make clean-minikube
+```
