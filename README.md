@@ -8,10 +8,11 @@
 	- [Design](#microservices)	  
 	- [Requirements](#requirements)	 
 - How tos:
-	- [Developer setup](#developer-setup-first-time)
-	- [Build the project](build-before-deploy)
-	- [Deploy in docker-compose](#run-in-docker-compose)
-	- [Deploy in minikube](#run-in-minikube)
+	- [Developer setup](#first-time-developer-setup)
+	- [Build the project](#build-before-deploy)
+	- Deploy
+		- [Deploy in docker-compose](#run-in-docker-compose)
+		- [Deploy in minikube](#run-in-minikube)
 - Legal
 	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
 	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
