@@ -8,8 +8,8 @@ services:
     external_links:
       - k8guardstartfromhere_cassandra_1:cassandra
     env_file:
-      - .env-creds
       - .env
+      - .env-creds
     ports:
       - 3001:3001
 version: "2"

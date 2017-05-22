@@ -6,9 +6,12 @@ metadata:
   name: k8guard-kafka-service
 spec:
   ports:
-    # The port that this service should serve on.
-    - port: 9092
-
+  - port: 2181
+    targetPort: 2181
+    name: zk
+  - port: 9092
+    targetPort: 9092
+    name: kafka
   # Label keys and values that must match in order to receive traffic for this service.
   selector:
      app: k8guard-kafka

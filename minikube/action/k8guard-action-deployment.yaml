@@ -44,7 +44,7 @@ spec:
           - name: K8GUARD_ACTION_CASSANDRA_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: k8guard-action-configmap
+                name: k8guard-action-secrets
                 key: cassandra-password
           - name: K8GUARD_ACTION_CASSANDRA_CAPATH
             valueFrom:
