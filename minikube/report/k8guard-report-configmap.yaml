@@ -5,5 +5,8 @@ metadata:
 data:
   k8guard-namespace: ""
   k8guard-cluster: "minikube"
+  cassandra-username: "cassandra"
+  cassandra-ca-path: ""
+  cassandra-ssl-validation: "false"
   cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
   cassandra-keyspace: "k8guardkeyspace"

@@ -12,6 +12,8 @@ data:
   k8guard-approved-ingress-suffixes: ""
   k8guard-ignore-namespaces: ""
   k8guard-ignore-pods-prefix: ""
+  k8guard-ignore-deployments: ""
+  k8guard-ignore-violations: ""
   k8guard-output-pods-to-file: "FALSE"
   k8guard-cache-expiration-seconds: "300"
   k8guard-http-cache-expire: "TRUE"

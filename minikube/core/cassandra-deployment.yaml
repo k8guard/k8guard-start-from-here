@@ -11,5 +11,4 @@ spec:
     spec:
       containers:
       - name: k8guard-cassandra
-        image: cassandra
-        
+        image: bitnami/cassandra
