@@ -112,11 +112,11 @@
 
 
 
-#  Deploy
+#  Deploy Options
 
 You can choose to either deploy in minikube or run in in docker-compose. all batteries are included (kafka, cassandra, memcached)
 
-##  Run in docker-compose
+##  Deploy Option 1: Run in docker-compose
 
 1. Config :
 	edit `.env` and `env-creds` files. (default values should work fine.)
@@ -174,7 +174,7 @@ You can choose to either deploy in minikube or run in in docker-compose. all bat
 
 
 
-## Run in minikube
+## Deploy Option 2: Run in minikube
 Make sure you have installed minkube and edit the config maps and secrets inside the minikube folder for each service, and follow these steps:
 
 1. ```minikube start --kubernetes-version v1.5.1```
