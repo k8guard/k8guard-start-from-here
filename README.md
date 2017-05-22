@@ -9,10 +9,13 @@
 	- [Requirements](#requirements)	 
 - How tos:
 	- [Developer setup](#developer-setup-first-time)
-	- [Build the project](build-the-project)
+	- [Build the project](build-before-deploy)
 	- [Deploy in docker-compose](#run-in-docker-compose)
 	- [Deploy in minikube](#run-in-minikube)
-
+- Legal
+	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
+	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
+	- 	[Apache License 2.0](https://github.com/k8guard/k8guard-start-from-here/blob/master/LICENSE)
 
 ----
 
@@ -66,7 +69,7 @@
 
 
 
-# 1. Developer Setup First Time
+# First Time Developer Setup
 
 * Install Go and Setup your setup your `$GOPATH`.
 
@@ -92,9 +95,8 @@
 
 	* Hint 2: `Makefile` is your friend and it is better than this documentation. take a look at the Makefile in the root of this folder, to undrestand all the commands you need.
 
----
 
-# 2. Build the project
+# Build Before Deploy
 
 - To Build all the micro-services:
 
@@ -107,9 +109,9 @@
 		- ``` make build-report```
 
 
----
 
-# 3. Deploy locally
+
+#  Deploy
 
 You can choose to either deploy in minikube or run in in docker-compose. all batteries are included (kafka, cassandra, memcached)
 

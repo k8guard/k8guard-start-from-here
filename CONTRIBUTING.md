@@ -8,7 +8,7 @@ Please send pull requests against the right repo for each repository.
 - For discover-service:
 
 	```
-	git clone git@github.com:k8guard/k8guard-start-from-here.git
+	git clone git@github.com:k8guard/k8guard-discover.git
 	```
 
 - For action-service:
@@ -37,11 +37,11 @@ Please send pull requests against the right repo for each repository.
 	git clone git@github.com:k8guard/k8guard-start-from-here.git
 	```
 
-Make your change. run it, make sure to test your changes in the provided minikube and docker-compose, and if possible write unit or intergation tests for it.
+Make your change. run it, make sure to test your changes in the provided minikube and docker-compose, and if possible write unit or integration tests for it.
 
 Write a good commit message, Push to your fork and submit a pull request.
 
-PRs will be reviewed in a couple days. if you have any quetions please contact the [authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md) .
+PRs will be reviewed in a couple days. if you have any questions please contact the [authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md) .
 
 
 If you would like your name to be added to the contributors, please add a row to AUTHORS.md file.
