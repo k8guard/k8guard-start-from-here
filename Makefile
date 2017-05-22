@@ -14,7 +14,14 @@ setup-source:
 	cp .env-creds-template .env-creds
 	cp .env-template .env
 	cp minikube/action/k8guard-action-secrets.yaml.EXAMPLE  minikube/action/k8guard-action-secrets.yaml
-	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/action/k8guard-report-secrets.yaml
+	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/report/k8guard-report-secrets.yaml
+
+update-source:
+	echo "Updating all repos from origin/master"
+	cd ../k8guardlibs && git checkout master && git pull origin master && make deps
+	cd ../k8guard-discover && git checkout master && git pull origin master && make deps
+	cd ../k8guard-action && git checkout master && git pull origin master && make deps
+	cd ../k8guard-report && git checkout master && git pull origin master && make deps
 
 create-hooks:
 	cd ../k8guardlibs && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
