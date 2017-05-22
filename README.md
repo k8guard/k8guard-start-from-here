@@ -186,7 +186,7 @@ Give it a couple minutes. and hit the service urls:
 
 - Get discover service url:
 
-    ``` minikube service k8guard-report-service ```
+    ``` minikube service k8guard-discover-service ```
 
 - Get report service url:
 
