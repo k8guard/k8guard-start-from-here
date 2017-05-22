@@ -1,10 +1,8 @@
 developer-setup: setup-source create-hooks
 
 setup-source:
-	ifndef glide
-    $(error "glide is not install please install glide")
-	endif
-	brew install glide
+	echo "Installing glide"
+	curl https://glide.sh/get | sh
 	echo "Installing goimports"
 	go get golang.org/x/tools/cmd/goimports
 	echo "Cloning Repos"
@@ -19,10 +17,10 @@ setup-source:
 	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/action/k8guard-report-secrets.yaml
 
 create-hooks:
-	cd ../k8guardlibs && ln -s ../../hooks/pre-commit .git/hooks/pre-commit
-	cd ../k8guard-discover && ln -s ../../hooks/pre-commit .git/hooks/pre-commit
-	cd ../k8guard-action && ln -s ../../hooks/pre-commit .git/hooks/pre-commit
-	cd ../k8guard-report && ln -s ../../hooks/pre-commit .git/hooks/pre-commit
+	cd ../k8guardlibs && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
+	cd ../k8guard-discover && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
+	cd ../k8guard-action && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
+	cd ../k8guard-report && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
 
 build-discover:
 	cd ../k8guard-discover && make clean
