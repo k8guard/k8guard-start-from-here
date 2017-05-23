@@ -10,7 +10,7 @@
 - How tos:
 	- [Developer setup](#first-time-developer-setup)
 	- [Build the project](#build-before-deploy)
-	- [Deploy locally](#deploy-(batteries included))
+	- [Deploy locally](#deploy-(batteries-included))
         - [Option 1: Docker Compose](#deploy-option-1-run-in-docker-compose)
         - [Option 2: Kubernetes/ Minikube](#deploy-option-2-run-in-minikube)
 - Legal
