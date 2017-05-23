@@ -123,7 +123,7 @@ You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) 
 1. Config :
 	edit `.env` and `env-creds` files. (default values should work fine.)
 
-1. set your kubernete context to the cluster you want the k8guard to run against.
+1. set your kubernetes context to the cluster you want the k8guard to run against.
 
 	```
 	kubectl config use-context REPLACE_WITH_YOUR_CONTEXT
@@ -152,12 +152,12 @@ You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) 
 	make up-action
 	```
 
-1. Open the Discover api url in the browser:
+1. Open the discover service url in the browser:
     ```
     http://localhost:3000
     ```
 
-1. Open the Report service url in the browser:
+1. Open the report service url in the browser:
     ```
     http://localhost:3001
     ```
