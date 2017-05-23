@@ -11,8 +11,8 @@
 	- [Developer setup](#first-time-developer-setup)
 	- [Build the project](#build-before-deploy)
 	- Deploy
-		- [Deploy in docker-compose](#run-in-docker-compose)
-		- [Deploy in minikube](#run-in-minikube)
+        - [Option 1: Docker Compose](#deploy-option-1-run-in-docker-compose)
+        - [Option 2: Kubernetes Minikube](#deploy-option-2-run-in-minikube)
 - Legal
 	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
 	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
@@ -112,11 +112,11 @@
 
 
 
-#  Deploy
+#  Deploy Options
 
 You can choose to either deploy in minikube or run in in docker-compose. all batteries are included (kafka, cassandra, memcached)
 
-##  Run in docker-compose
+##  Deploy Option 1: Run in docker-compose
 
 1. Config :
 	edit `.env` and `env-creds` files. (default values should work fine.)
@@ -174,7 +174,7 @@ You can choose to either deploy in minikube or run in in docker-compose. all bat
 
 
 
-## Run in minikube
+## Deploy Option 2: Run in minikube
 Make sure you have installed minkube and edit the config maps and secrets inside the minikube folder for each service, and follow these steps:
 
 1. ```minikube start --kubernetes-version v1.5.1```
