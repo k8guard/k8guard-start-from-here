@@ -11,8 +11,8 @@
 	- [Developer setup](#first-time-developer-setup)
 	- [Build the project](#build-before-deploy)
 	- Deploy
-		- [Deploy in docker-compose](#run-in-docker-compose)
-		- [Deploy in minikube](#run-in-minikube)
+        - [Option 1: Docker Compose](#Deploy-Option-1:-Run-in-docker-compose)
+        - [Option 2: Kubernetes Minikube](#Deploy-Option-2:-Run-in-minikube)
 - Legal
 	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
 	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
