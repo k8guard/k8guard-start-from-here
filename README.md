@@ -146,10 +146,10 @@ You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) 
 	make up-discover
 	```
 
-1.  To bring up action, in a new terminal run:
+1.  To bring up report, in a new terminal run:
 
 	```
-	make up-action
+	make up-report
 	```
 
 1. Open the discover service url in the browser:
