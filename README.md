@@ -113,8 +113,10 @@
 
 #  Deploy locally
 
-Don't forget to build before deploy.
-You can choose to either deploy in minikube or run in in docker-compose.
+Don't forget to [build](#build-before-deploy) before deploy.
+You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) or run in in [docker-compose](#deploy-option-1-run-in-docker-compose) based on your needs.
+
+
 
 ##  Deploy Option 1: Run in docker-compose
 
@@ -122,6 +124,10 @@ You can choose to either deploy in minikube or run in in docker-compose.
 	edit `.env` and `env-creds` files. (default values should work fine.)
 
 1. set your kubernete context to the cluster you want the k8guard to run against.
+
+	```
+	kubectl config use-context REPLACE_WITH_YOUR_CONTEXT
+	```
 
 1. Bring the core (cassandra, kafka, memcached):
 
