@@ -10,9 +10,9 @@
 - How tos:
 	- [Developer setup](#first-time-developer-setup)
 	- [Build the project](#build-before-deploy)
-	- Deploy
+	- [Deploy locally](#deploy-(batteries included)
         - [Option 1: Docker Compose](#deploy-option-1-run-in-docker-compose)
-        - [Option 2: Kubernetes Minikube](#deploy-option-2-run-in-minikube)
+        - [Option 2: Kubernetes/ Minikube](#deploy-option-2-run-in-minikube)
 - Legal
 	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
 	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
@@ -111,15 +111,17 @@
 
 
 
+#  Deploy locally
 
-#  Deploy Options
-
-You can choose to either deploy in minikube or run in in docker-compose. all batteries are included (kafka, cassandra, memcached)
+Don't forget to build before deploy.
+You can choose to either deploy in minikube or run in in docker-compose.
 
 ##  Deploy Option 1: Run in docker-compose
 
 1. Config :
 	edit `.env` and `env-creds` files. (default values should work fine.)
+
+1. set your kubernete context to the cluster you want the k8guard to run against.
 
 1. Bring the core (cassandra, kafka, memcached):
 
@@ -175,28 +177,37 @@ You can choose to either deploy in minikube or run in in docker-compose. all bat
 
 
 ## Deploy Option 2: Run in minikube
-Make sure you have installed minkube and edit the config maps and secrets inside the minikube folder for each service, and follow these steps:
+
+In this option you will test k8guard against a minikube context and will also deploy it to minikube. (safest way for develpoment)
+
+### Setup and start right minikube
+1. Make sure you install minikube v0.18.0. There is an [issue](https://github.com/kubernetes/minikube/issues/1521) with latest version of minikube. don't install latest.
+
+	```
+	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.18.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+	```
 
 1. ```minikube start --kubernetes-version v1.5.1```
+
+### Deploy Minikube
+
 1. ```eval $(minikube docker-env)```
 1. ```make deploy-minikube```
 
 
+### Get the endpoint URLS
+
 Give it a couple minutes. and hit the service urls:
 
-- Get discover service url:
-
-    ``` minikube service k8guard-discover-service ```
+1. Get discover service url: ``` minikube service k8guard-discover-service ```
 
 - Get report service url:
-
-    ``` minikube service k8guard-report-service ```
-
+ ``` minikube service k8guard-report-service ```
 
 
 ### Clean up minikube
-To delete the deployment in minikube:
+- To delete the deployment in minikube:
 
-```
-make clean-minikube
-```
+	```
+	make clean-minikube
+	```
