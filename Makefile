@@ -90,14 +90,20 @@ clean-minikube:
 	kubectl delete -f minikube/discover || true
 	kubectl delete -f minikube/action || true
 
-# super clean
+# super clean minikube
 sclean-minikube:
 	minikube delete
 
-build-local-dockers:
-	cd ../k8guard-discover && make build-docker
+build-action-local-docker:
 	cd ../k8guard-action && make build-docker
+
+build-discover-local-docker:
+	cd ../k8guard-discover && make build-docker
+
+build-report-local-docker:
 	cd ../k8guard-report && make build-docker
+
+build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker
 
 deploy-minikube: build-local-dockers
 	kubectl config use-context minikube
