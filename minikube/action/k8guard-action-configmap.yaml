@@ -15,6 +15,7 @@ data:
   cassandra-username: "cassandra"
   cassandra-ca-path: ""
   cassandra-ssl-validation: "false"
+  k8guard-cassandra-create-keyspace: "true"
   smtp-server: ""
   smtp-port: "25"
   smtp-send-from: "DO_NOT_REPLY@REPLACE_WITH_DOMAIN.COM"
