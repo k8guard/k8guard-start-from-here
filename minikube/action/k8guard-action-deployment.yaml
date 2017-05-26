@@ -151,3 +151,8 @@ spec:
               configMapKeyRef:
                 name: k8guard-action-configmap
                 key: k8guard-cassandra-create-keyspace
+          - name: K8GUARD_CASSANDRA_CREATE_TABLES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-cassandra-create-tables
