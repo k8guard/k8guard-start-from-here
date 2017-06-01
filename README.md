@@ -215,7 +215,7 @@ Give it a couple minutes. and hit the service urls:
 
 ## Configuration
 
-K8Guard comes with tons of configurations, currently the documentation for it is in comments of these files. (betters docs will come someday)
+K8Guard comes with tons of configurations, currently the documentation for it is in comments of these files. (better docs will come someday)
 
 * [.env-template](https://github.com/k8guard/k8guard-start-from-here/blob/master/.env-creds-template)
 * [.env-creds-template](https://github.com/k8guard/k8guard-start-from-here/blob/master/.env-creds-template)
