@@ -7,12 +7,14 @@
 	- [Violations Examples](#violations-examples)
 	- [Design](#microservices)	  
 	- [Requirements](#requirements)	 
-- How tos:
+- [Get started super fast](#first-time-developer-setup):
 	- [Developer setup](#first-time-developer-setup)
 	- [Build the project](#build-before-deploy)
 	- [Deploy locally](#deploy-locally)
         - [Option 1: Docker Compose](#deploy-option-1-run-in-docker-compose)
         - [Option 2: Kubernetes/ Minikube](#deploy-option-2-run-in-minikube)
+  - [Config](#configuration)
+
 - Legal
 	- [Authors](https://github.com/k8guard/k8guard-start-from-here/blob/master/AUTHORS.md)
 	- [Become a contributor](https://github.com/k8guard/k8guard-start-from-here/blob/master/CONTRIBUTING.md)
@@ -211,9 +213,9 @@ Give it a couple minutes. and hit the service urls:
  ``` minikube service k8guard-report-service ```
 
 
-### Clean up minikube
-- To delete the deployment in minikube:
+## Configuration
 
-	```
-	make clean-minikube
-	```
+K8Guard comes with tons of configurations, currently the documentation for it is in comments of these files. (betters docs will come someday)
+
+* [.env-template](https://github.com/k8guard/k8guard-start-from-here/blob/master/.env-creds-template)
+* [.env-creds-template](https://github.com/k8guard/k8guard-start-from-here/blob/master/.env-creds-template)
