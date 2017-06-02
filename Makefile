@@ -17,7 +17,7 @@ setup-source:
 	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/report/k8guard-report-secrets.yaml
 
 update-source:
-	echo "Updating all repos from origin/master"
+	@read -p "This will pull origin/master on all k8guard repos, please enter to continue ";
 	cd ../k8guardlibs && git checkout master && git pull origin master && make deps
 	cd ../k8guard-discover && git checkout master && git pull origin master && make deps
 	cd ../k8guard-action && git checkout master && git pull origin master && make deps
@@ -87,7 +87,8 @@ up-report-d: clean-report
 clean-minikube:
 	kubectl delete -f minikube/core || true
 	kubectl delete -f minikube/report || true
-	kubectl delete -f minikube/discover || true
+	kubectl delete -f minikube/discover-api || true
+	kubectl delete -f minikube/discover-cronjob || true
 	kubectl delete -f minikube/action || true
 
 # super clean minikube
@@ -108,10 +109,11 @@ build-local-dockers: build-action-local-docker build-discover-local-docker build
 deploy-minikube: build-local-dockers
 	kubectl config use-context minikube
 	kubectl apply -f minikube/core
-	sleep 100
+	@read -p "Pausing ... Please press enter to continue ";
 	kubectl apply -f minikube/action
 	kubectl apply -f minikube/report
-	kubectl apply -f minikube/discover
+	kubectl apply -f minikube/discover-api
+	kubectl apply -f minikube/discover-cronjob
 
 up: up-core up-action-d up-discover-d up-report-d
 

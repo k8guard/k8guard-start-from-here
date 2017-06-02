@@ -115,8 +115,10 @@
 
 #  Deploy locally
 
-Don't forget to [build](#build-before-deploy) before deploy.
-You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) or run in in [docker-compose](#deploy-option-1-run-in-docker-compose) based on your needs.
+1. [Build](#build-before-deploy) before deploy.
+2. Choose one option for deploy:
+	3.  [Minikube](#deploy-option-2-run-in-minikube)
+	4.  [Docker-compose](#deploy-option-1-run-in-docker-compose)
 
 
 
@@ -188,7 +190,7 @@ You can choose to either deploy in [minikube](#deploy-option-2-run-in-minikube) 
 
 In this option you will test k8guard against a minikube context and will also deploy it to minikube. (safest way for develpoment)
 
-### Setup and start right minikube
+### Setup and start minikube
 1. Make sure you install minikube v0.18.0. There is an [issue](https://github.com/kubernetes/minikube/issues/1521) with latest version of minikube. don't install latest.
 
 	```

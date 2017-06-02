@@ -5,6 +5,7 @@ metadata:
 spec:
   # At every 3rd minute. for local testing
   schedule: "*/3 * * * *"
+  concurrencyPolicy: Replace
   jobTemplate:
     spec:
       template:
