@@ -28,3 +28,4 @@ data:
   action-warning-count-before_action: "4"
   action-duration-between-notifying-again: "24h"
   action-duration-violation-expires: "120h"
+  k8guard-action-violation-email-footer: ""
