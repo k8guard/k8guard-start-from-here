@@ -194,7 +194,7 @@ In this option you will test k8guard against a minikube context and will also de
 1. Make sure you install minikube v0.18.0. There is an [issue](https://github.com/kubernetes/minikube/issues/1521) with latest version of minikube. don't install latest.
 
 	```
-	curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.18.0/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+	curl -Lo minikube-binary https://storage.googleapis.com/minikube/releases/v0.18.0/minikube-darwin-amd64 && chmod +x minikube-binary && sudo mv minikube-binary /usr/local/bin/minikube
 	```
 
 1. ```minikube start --kubernetes-version v1.5.1```
