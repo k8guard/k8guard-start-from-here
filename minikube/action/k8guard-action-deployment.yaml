@@ -156,3 +156,8 @@ spec:
               configMapKeyRef:
                 name: k8guard-action-configmap
                 key: k8guard-cassandra-create-tables
+          - name: K8GUARD_ACTION_VIOLATION_EMAIL_FOOTER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-action-violation-email-footer
