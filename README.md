@@ -197,7 +197,7 @@ In this option you will test k8guard against a minikube context and will also de
 	curl -Lo minikube-binary https://storage.googleapis.com/minikube/releases/v0.18.0/minikube-darwin-amd64 && chmod +x minikube-binary && sudo mv minikube-binary /usr/local/bin/minikube
 	```
 
-1. ```minikube start --kubernetes-version v1.5.1```
+1. ```minikube start --memory 4096 --kubernetes-version v1.5.1```
 
 ### Deploy Minikube
 
