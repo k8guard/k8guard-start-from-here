@@ -3,12 +3,12 @@
 
 
 
-### Documentation Moved To [K8Guard Website](https://k8guard.github.io/).
+### For Full Documentation Visit [K8Guard Website](https://k8guard.github.io/).
 
 
 
 
-###  Try Locally:
+###  Try K8Guard Locally:
 
 
 * [First Time Developer Setup](https://k8guard.github.io/deploy/developer-setup/)
