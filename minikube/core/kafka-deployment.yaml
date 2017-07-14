@@ -13,13 +13,10 @@ spec:
       - name: zookeeper
         image: wurstmeister/zookeeper
         # image: satlank/microzookeeper:3.4.9-1
-        env:
-          - name: KAFKA_ADVERTISED_HOST_NAME
-            value: "kafka"
         ports:
         - containerPort: 2181
       - name: kafka
-        image: wurstmeister/kafka:0.10.2.0
+        image: wurstmeister/kafka:0.10.2.1
         env:
           - name: KAFKA_ZOOKEEPER_CONNECT
             value: "localhost:2181"
@@ -29,6 +26,5 @@ spec:
             value: "9092"
           - name: KAFKA_CREATE_TOPICS
             value: "k8guard-to-action-k8s-lab:1:1"
-        # image: satlank/microkafka:0.10.1.0-1
         ports:
         - containerPort: 9092

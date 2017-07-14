@@ -1,4 +1,7 @@
-developer-setup: setup-source create-hooks
+.DEFAULT_GOAL := help
+.PHONY: help
+
+developer-setup: setup-source create-hooks ## Run this only once. Downloads github repos and creates pre-commit hooks.
 
 setup-source:
 	echo "Installing glide"
@@ -16,7 +19,7 @@ setup-source:
 	cp minikube/action/k8guard-action-secrets.yaml.EXAMPLE  minikube/action/k8guard-action-secrets.yaml
 	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/report/k8guard-report-secrets.yaml
 
-update-source:
+update-source: ## git pulls origin/master on all the k8guard repos and updates dependencies.
 	@read -p "This will pull origin/master on all k8guard repos, please enter to continue ";
 	cd ../k8guardlibs && git checkout master && git pull origin master && make deps
 	cd ../k8guard-discover && git checkout master && git pull origin master && make deps
@@ -29,70 +32,72 @@ create-hooks:
 	cd ../k8guard-action && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
 	cd ../k8guard-report && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
 
-build-discover:
+build-discover: ## builds discover microservice from source.
 	cd ../k8guard-discover && make clean
 	cd ../k8guard-discover && make build
 
-build-action:
+build-action: ## builds action microservice from source.
 	cd ../k8guard-action && make clean
 	cd ../k8guard-action && make build
 
-build-report:
+build-report: ## builds report microservice from source.
 	cd ../k8guard-report && make clean
 	cd ../k8guard-report && make build
 
-build-all: build-discover build-action build-report
 
-clean: clean-action clean-discover clean-report clean-core
 
-clean-core:
+build-all: build-discover build-action build-report ## builds all the microservices from source.
+
+clean-compose: clean-action-compose clean-discover-compose clean-report-compose clean-core-compose
+
+clean-core-compose:
 	docker-compose -f docker-compose-core.yaml down
 
-up-core: clean-core
+up-core-compose: clean-core-compose
 	docker-compose -f docker-compose-core.yaml up -d
 
-clean-action:
+clean-action-compose:
 	docker-compose -f docker-compose-action.yaml down
 
-up-action: clean-action
+up-action-compose: clean-action-compose
 	docker-compose -f docker-compose-action.yaml build
 	docker-compose -f docker-compose-action.yaml up
 
-up-action-d: clean-action
+up-action-compose-d: clean-action-compose
 	docker-compose -f docker-compose-action.yaml build
 	docker-compose -f docker-compose-action.yaml up -d
 
-clean-discover:
+clean-discover-compose:
 	docker-compose -f docker-compose-discover.yaml down
 
-up-discover: clean-discover
+up-discover-compose: clean-discover-compose
 	docker-compose -f docker-compose-discover.yaml build
 	docker-compose -f docker-compose-discover.yaml up
 
-up-discover-d: clean-discover
+up-discover-compose-d: clean-discover-compose
 		docker-compose -f docker-compose-discover.yaml build
 		docker-compose -f docker-compose-discover.yaml up -d
 
-clean-report:
+clean-report-compose:
 	docker-compose -f docker-compose-report.yaml down
 
-up-report: clean-report
+up-report-compose: clean-report-compose
 	docker-compose -f docker-compose-report.yaml build
 	docker-compose -f docker-compose-report.yaml up
 
-up-report-d: clean-report
+up-report-compose-d: clean-report
 	docker-compose -f docker-compose-report.yaml build
 	docker-compose -f docker-compose-report.yaml up -d
 
-clean-minikube:
+clean-minikube: ## delete all pods and jobs on the minikube
 	kubectl delete -f minikube/core || true
 	kubectl delete -f minikube/report || true
 	kubectl delete -f minikube/discover-api || true
 	kubectl delete -f minikube/discover-cronjob || true
 	kubectl delete -f minikube/action || true
 
-# super clean minikube
-sclean-minikube:
+
+sclean-minikube: ## super clean minikube, delete minikube completely.
 	minikube delete
 
 build-action-local-docker:
@@ -104,9 +109,9 @@ build-discover-local-docker:
 build-report-local-docker:
 	cd ../k8guard-report && make build-docker
 
-build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker
+build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker ## Builds all the docker images locally from source code
 
-deploy-minikube: build-local-dockers
+deploy-minikube: build-local-dockers ## Builds all docker images from source and deploys to minikube.
 	kubectl config use-context minikube
 	kubectl apply -f minikube/core
 	@read -p "Pausing ... Please press enter to continue ";
@@ -115,9 +120,11 @@ deploy-minikube: build-local-dockers
 	kubectl apply -f minikube/discover-api
 	kubectl apply -f minikube/discover-cronjob
 
+build-deploy-minikube: build-all deploy-minikube
+
 up: up-core up-action-d up-discover-d up-report-d
 
-# super up
 sup: build-all up
 
-.PHONY: build
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
