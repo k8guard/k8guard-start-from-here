@@ -14,6 +14,7 @@ services:
       - 3000:3000
     volumes:
       - ${HOME}/.kube:/root/.kube
+      # - ${HOME}/.minikube:${HOME}/.minikube # only if you want docker-compose k8guard to run against a minikube.
   k8guard-discover-cron:
      build:
         context: ../k8guard-discover/
@@ -27,6 +28,7 @@ services:
        - k8guardstartfromhere_memcached_1:memcached
      volumes:
        - ${HOME}/.kube:/root/.kube
+       - ${HOME}/.minikube:${HOME}/.minikube
      command:
        - -kmode
 version: "2"
