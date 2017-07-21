@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
-developer-setup: setup-source create-hooks ## Run this only once. Downloads github repos and creates pre-commit hooks.
+developer-setup: setup-source create-pre-commit-hooks ## Run this only once. Downloads github repos and creates pre-commit hooks.
 
 setup-source:
 	echo "Installing glide"
@@ -26,11 +26,11 @@ update-source: ## git pulls origin/master on all the k8guard repos and updates d
 	cd ../k8guard-action && git checkout master && git pull origin master && make deps
 	cd ../k8guard-report && git checkout master && git pull origin master && make deps
 
-create-hooks:
-	cd ../k8guardlibs && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
-	cd ../k8guard-discover && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
-	cd ../k8guard-action && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
-	cd ../k8guard-report && ln -s ../../hooks/pre-commit .git/hooks/pre-commit || true
+create-pre-commit-hooks: ## creates pre-commit hooks for formatting for all the repos.
+	cd ../k8guard-discover && make create-pre-commit-hooks
+	cd ../k8guard-action && make create-pre-commit-hooks
+	cd ../k8guardlibs && make create-pre-commit-hooks
+	cd ../k8guard-report && make create-pre-commit-hooks
 
 build-discover: ## builds discover microservice from source.
 	cd ../k8guard-discover && make clean
@@ -43,8 +43,6 @@ build-action: ## builds action microservice from source.
 build-report: ## builds report microservice from source.
 	cd ../k8guard-report && make clean
 	cd ../k8guard-report && make build
-
-
 
 build-all: build-discover build-action build-report ## builds all the microservices from source.
 
@@ -96,7 +94,6 @@ clean-minikube: ## delete all pods and jobs on the minikube
 	kubectl delete -f minikube/discover-cronjob || true
 	kubectl delete -f minikube/action || true
 
-
 sclean-minikube: ## super clean minikube, delete minikube completely.
 	minikube delete
 
@@ -122,9 +119,9 @@ deploy-minikube: build-local-dockers ## Builds all docker images from source and
 
 build-deploy-minikube: build-all deploy-minikube
 
-up: up-core up-action-d up-discover-d up-report-d
+up-compose: up-core-compose up-action-compose-d up-discover-compose-d up-report-compose-d ## deploys all the microservices to dokcer-compose
 
-sup: build-all up
+sup-compose: build-all up ## super up (Builds all and then deploys up all the microservices in dokcer-compose)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
