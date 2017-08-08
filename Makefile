@@ -20,7 +20,7 @@ setup-source:
 	cp minikube/report/k8guard-report-secrets.yaml.EXAMPLE  minikube/report/k8guard-report-secrets.yaml
 
 update-source: ## git pulls origin/master on all the k8guard repos and updates dependencies.
-	@read -p "This will pull origin/master on all k8guard repos, please enter to continue ";
+	@read -p "This will pull origin/master on all k8guard repos, please enter to continue " _
 	cd ../k8guardlibs && git checkout master && git pull origin master && make deps
 	cd ../k8guard-discover && git checkout master && git pull origin master && make deps
 	cd ../k8guard-action && git checkout master && git pull origin master && make deps
@@ -111,7 +111,7 @@ build-local-dockers: build-action-local-docker build-discover-local-docker build
 deploy-minikube: build-local-dockers ## Builds all docker images from source and deploys to minikube.
 	kubectl config use-context minikube
 	kubectl apply -f minikube/core
-	@read -p "Pausing ... Please press enter to continue ";
+	@read -p "Pausing ... Please press enter to continue " _
 	kubectl apply -f minikube/action
 	kubectl apply -f minikube/report
 	kubectl apply -f minikube/discover-api
