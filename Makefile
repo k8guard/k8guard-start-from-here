@@ -83,7 +83,7 @@ up-report-compose: clean-report-compose
 	docker-compose -f docker-compose-report.yaml build
 	docker-compose -f docker-compose-report.yaml up
 
-up-report-compose-d: clean-report
+up-report-compose-d: clean-report-compose
 	docker-compose -f docker-compose-report.yaml build
 	docker-compose -f docker-compose-report.yaml up -d
 
