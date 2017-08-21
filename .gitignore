@@ -3,3 +3,4 @@
 .env-creds
 minikube/action/k8guard-action-secrets.yaml
 minikube/report/k8guard-report-secrets.yaml
+/.project
