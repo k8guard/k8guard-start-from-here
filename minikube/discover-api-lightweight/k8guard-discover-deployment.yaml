@@ -1,0 +1,137 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-discover-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: k8guard-discover-api
+    spec:
+      containers:
+      - name: k8guard-discover
+        image: local/k8guard-discover
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            memory: 10Mi
+        env:
+          - name: K8GUARD_NAMESPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-namespace
+          - name: K8GUARD_CLUSTER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-cluster
+          - name: K8GUARD_INCLUDE_ALPHA
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-include-alpha
+          - name: K8GUARD_APPROVED_IMAGE_REPOS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-approved-image-repos
+          - name: K8GUARD_APPROVED_IMAGE_SIZE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-approved-image-size
+          - name: K8GUARD_INGRESS_MUST_CONTAIN
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-ingress-must-contain
+          - name: K8GUARD_INGRESS_MUST_NOT_CONTAIN
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-ingress-must-not-contain
+          - name: K8GUARD_APPROVED_INGRESS_SUFFIXES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-approved-ingress-suffixes
+
+          - name: K8GUARD_IGNORE_NAMESPACES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-ignore-namespaces
+          - name: K8GUARD_IGNORE_PODS_PREFIX
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-ignore-pods-prefix
+          - name: K8GUARD_REQUIRED_ANNOTATIONS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-required-annotations
+          - name: K8GUARD_REQUIRED_LABELS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-required-labels
+          - name: K8GUARD_REQUIRED_ENTITIES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-required-entities
+          - name: K8GUARD_OUTPUT_PODS_TO_FILE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-output-pods-to-file
+          - name: K8GUARD_CACHE_EXPIRATION_SECONDS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-cache-expiration-seconds
+          - name: K8GUARD_MEMCACHED_HOSTNAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-memcahced-hostname
+          - name: K8GUARD_LOG_LEVEL
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-log-level
+          - name: K8GUARD_CACHE_TYPE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-cache-type
+          - name: K8GUARD_MESSAGE_BROKER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-message-broker
+          - name: K8GUARD_REDIS_BROKER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-redis-broker
+          - name: K8GUARD_REDIS_ACTION_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-redis-action-topic
+          - name: K8GUARD_IGNORED_VIOLATIONS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-discover-configmap
+                key: k8guard-ignore-violations
+
+        ports:
+        - containerPort: 3000

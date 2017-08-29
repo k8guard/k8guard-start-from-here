@@ -58,9 +58,9 @@ build-report-local-docker:
 build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker ## Builds all the docker images locally from source code
 
 
-####################################################################
-#######		original docker compose using kafka/zookeeper    #######
-####################################################################
+#############################################################################
+#######		original docker compose using memcache/kafka/zookeeper    #######
+#############################################################################
 
 clean-compose: clean-action-compose clean-discover-compose clean-report-compose clean-core-compose
 
@@ -154,9 +154,9 @@ up-report-compose-lightweight-d: clean-report-compose-lightweight
 up-compose-lightweight: up-core-compose-lightweight up-action-compose-lightweight-d up-discover-compose-lightweight-d up-report-compose-lightweight-d ## deploys all the microservices to dokcer-compose
 
 
-#########################################################################
-#######		original minikube deployment using kafka/zookepper    #######
-#########################################################################
+##################################################################################
+#######		original minikube deployment using memcache/kafka/zookepper    #######
+##################################################################################
 
 clean-minikube: ## delete all pods and jobs on the minikube
 	kubectl delete -f minikube/core || true
