@@ -1,0 +1,21 @@
+---
+services:
+  k8guard-action:
+    build:
+      context: ../k8guard-action/
+      dockerfile: Dockerfile-local
+    external_links:
+      - k8guardstartfromhere_redis_1:redis
+      - k8guardstartfromhere_cassandra_1:cassandra
+    networks:
+      - k8guardstartfromhere_default
+    env_file:
+      - .env-creds
+      - .env
+    volumes:
+      - ${HOME}/.kube:/root/.kube
+      # - ${HOME}/.minikube:${HOME}/.minikube # only if you want docker-compose k8guard to run against a minikube.
+version: "2"
+networks:
+  k8guardstartfromhere_default:
+    external: true

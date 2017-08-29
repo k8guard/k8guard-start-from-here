@@ -1,0 +1,19 @@
+---
+services:
+  k8guard-report:
+    build:
+      context: ../k8guard-report/
+    networks:
+      - k8guardstartfromhere_default
+    external_links:
+      - k8guardstartfromhere_cassandra_1:cassandra
+    env_file:
+      - .env
+      - .env-creds
+    ports:
+      - 3001:3001
+version: "2"
+
+networks:
+  k8guardstartfromhere_default:
+    external: true

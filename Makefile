@@ -46,6 +46,22 @@ build-report: ## builds report microservice from source.
 
 build-all: build-discover build-action build-report ## builds all the microservices from source.
 
+build-action-local-docker:
+	cd ../k8guard-action && make build-docker
+
+build-discover-local-docker:
+	cd ../k8guard-discover && make build-docker
+
+build-report-local-docker:
+	cd ../k8guard-report && make build-docker
+
+build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker ## Builds all the docker images locally from source code
+
+
+####################################################################
+#######		original docker compose using kafka/zookeeper    #######
+####################################################################
+
 clean-compose: clean-action-compose clean-discover-compose clean-report-compose clean-core-compose
 
 clean-core-compose:
@@ -87,6 +103,61 @@ up-report-compose-d: clean-report-compose
 	docker-compose -f docker-compose-report.yaml build
 	docker-compose -f docker-compose-report.yaml up -d
 
+up-compose: up-core-compose up-action-compose-d up-discover-compose-d up-report-compose-d ## deploys all the microservices to dokcer-compose
+
+
+####################################################################
+#######		lightweight docker compose using redis           #######
+####################################################################
+
+clean-compose-lightweight: clean-action-compose-lightweight clean-discover-compose-lightweight clean-report-compose-lightweight clean-core-compose-lightweight
+
+clean-core-compose-lightweight:
+	docker-compose -f docker-compose-core-lightweight.yaml down
+
+up-core-compose-lightweight: clean-core-compose-lightweight
+	docker-compose -f docker-compose-core-lightweight.yaml up -d
+
+clean-action-compose-lightweight:
+	docker-compose -f docker-compose-action-lightweight.yaml down
+
+up-action-compose-lightweight: clean-action-compose-lightweight
+	docker-compose -f docker-compose-action-lightweight.yaml build
+	docker-compose -f docker-compose-action-lightweight.yaml up
+
+up-action-compose-lightweight-d: clean-action-compose-lightweight
+	docker-compose -f docker-compose-action-lightweight.yaml build
+	docker-compose -f docker-compose-action-lightweight.yaml up -d
+
+clean-discover-compose-lightweight:
+	docker-compose -f docker-compose-discover-lightweight.yaml down
+
+up-discover-compose-lightweight: clean-discover-compose-lightweight
+	docker-compose -f docker-compose-discover-lightweight.yaml build
+	docker-compose -f docker-compose-discover-lightweight.yaml up
+
+up-discover-compose-lightweight-d: clean-discover-compose-lightweight
+		docker-compose -f docker-compose-discover-lightweight.yaml build
+		docker-compose -f docker-compose-discover-lightweight.yaml up -d
+
+clean-report-compose-lightweight:
+	docker-compose -f docker-compose-report-lightweight.yaml down
+
+up-report-compose-lightweight: clean-report-compose-lightweight
+	docker-compose -f docker-compose-report-lightweight.yaml build
+	docker-compose -f docker-compose-report-lightweight.yaml up
+
+up-report-compose-lightweight-d: clean-report-compose-lightweight
+	docker-compose -f docker-compose-report-lightweight.yaml build
+	docker-compose -f docker-compose-report-lightweight.yaml up -d
+
+up-compose-lightweight: up-core-compose-lightweight up-action-compose-lightweight-d up-discover-compose-lightweight-d up-report-compose-lightweight-d ## deploys all the microservices to dokcer-compose
+
+
+#########################################################################
+#######		original minikube deployment using kafka/zookepper    #######
+#########################################################################
+
 clean-minikube: ## delete all pods and jobs on the minikube
 	kubectl delete -f minikube/core || true
 	kubectl delete -f minikube/report || true
@@ -96,17 +167,6 @@ clean-minikube: ## delete all pods and jobs on the minikube
 
 sclean-minikube: ## super clean minikube, delete minikube completely.
 	minikube delete
-
-build-action-local-docker:
-	cd ../k8guard-action && make build-docker
-
-build-discover-local-docker:
-	cd ../k8guard-discover && make build-docker
-
-build-report-local-docker:
-	cd ../k8guard-report && make build-docker
-
-build-local-dockers: build-action-local-docker build-discover-local-docker build-report-local-docker ## Builds all the docker images locally from source code
 
 deploy-minikube: build-local-dockers ## Builds all docker images from source and deploys to minikube.
 	kubectl config use-context minikube
@@ -119,9 +179,34 @@ deploy-minikube: build-local-dockers ## Builds all docker images from source and
 
 build-deploy-minikube: build-all deploy-minikube
 
-up-compose: up-core-compose up-action-compose-d up-discover-compose-d up-report-compose-d ## deploys all the microservices to dokcer-compose
+####################################################################
+#######		lightweight minikube deployment using redis      #######
+####################################################################
 
-sup-compose: build-all up ## super up (Builds all and then deploys up all the microservices in dokcer-compose)
+clean-minikube-lightweight: ## delete all pods and jobs on the minikube
+	kubectl delete -f minikube/core-lightweight || true
+	kubectl delete -f minikube/report-lightweight || true
+	kubectl delete -f minikube/discover-api-lightweight || true
+	kubectl delete -f minikube/discover-cronjob-lightweight || true
+	kubectl delete -f minikube/action-lightweight || true
+
+sclean-minikube-lightweight: sclean-minikube-lightweight  ## super clean minikube, delete minikube completely.
+
+deploy-minikube-lightweight: build-local-dockers ## Builds all docker images from source and deploys to minikube.
+	kubectl config use-context minikube
+	kubectl apply -f minikube/core-lightweight
+	@read -p "Pausing ... Please press enter to continue " _
+	kubectl apply -f minikube/action-lightweight
+	kubectl apply -f minikube/report-lightweight
+	kubectl apply -f minikube/discover-api-lightweight
+	kubectl apply -f minikube/discover-cronjob-lightweight
+
+build-deploy-minikube-lightweight: build-all deploy-minikube-lightweight
+
+
+
+
+sup-compose: build-all up ## super up (Builds all and then deploys up all the microservices in docker-compose)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
