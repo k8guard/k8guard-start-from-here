@@ -11,6 +11,7 @@ services:
       - .env
     ports:
       - 3000:3000
+      - 3002:3002
     volumes:
       - ${HOME}/.kube:/root/.kube
       # - ${HOME}/.minikube:${HOME}/.minikube # only if you want docker-compose k8guard to run against a minikube.
