@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-cassandra
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8guard-cassandra
+    spec:
+      containers:
+      - name: k8guard-cassandra
+        image: bitnami/cassandra

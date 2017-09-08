@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: k8guard-label
+  name: k8guard-discover-service
+  annotations:
+{{ toYaml .Values.discover.service.annotations | indent 4 }}
+spec:
+  type: NodePort
+  ports:
+    # The port that this service should serve on.
+    - port: {{ .Values.discover.service.port }}
+  # Label keys and values that must match in order to receive traffic for this service.
+  selector:
+     app: k8guard-discover-api
