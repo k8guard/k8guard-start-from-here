@@ -1,6 +1,4 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "fullname" . -}}
-{{- $servicePort := .Values.service.externalPort -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -16,8 +14,7 @@ metadata:
     {{- end }}
 spec:
   rules:
-    {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /report
@@ -28,7 +25,6 @@ spec:
             backend:
               serviceName: k8guard-discover-service
               servicePort: {{ .Values.discover.service.port }}
-    {{- end -}}
   {{- if .Values.ingress.tls }}
   tls:
 {{ toYaml .Values.ingress.tls | indent 4 }}

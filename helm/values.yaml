@@ -1,32 +1,31 @@
 action:
   configmap:
-    data:
-      cluster-name: "minikube"
-      hipchat-room-id: ""
-      hipchat-base-url: ""
-      hipchat-tag-namespace-owner: "true"
-      k8guard-log-level: "debug"
-      k8guard-kafka-brokers: "k8guard-kafka-service.default.svc.cluster.local:9092"
-      k8guard-kafka-action-topic: "k8guard-to-action-k8s-lab"
-      cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
-      cassandra-keyspace: "k8guardkeyspace"
-      cassandra-username: "cassandra"
-      cassandra-ca-path: ""
-      cassandra-ssl-validation: "false"
-      k8guard-cassandra-create-keyspace: "true"
-      k8guard-cassandra-create-tables: "true"
-      smtp-server: ""
-      smtp-port: "25"
-      smtp-send-from: "DO_NOT_REPLY@REPLACE_WITH_DOMAIN.COM"
-      smtp-fallback-send-to: "REPLACE@REPLACE_WITH_DOMAIN.COM"
-      smtp-send-to-namespace-owner: "true"
-      action-safe-mode: "true"
-      action-dry-run: "false"
-      action-duration-between-chat-notifications: "30s"
-      action-warning-count-before_action: "4"
-      action-duration-between-notifying-again: "24h"
-      action-duration-violation-expires: "120h"
-      k8guard-action-violation-email-footer: ""
+    cluster-name: "minikube"
+    hipchat-room-id: ""
+    hipchat-base-url: ""
+    hipchat-tag-namespace-owner: "true"
+    k8guard-log-level: "debug"
+    k8guard-kafka-brokers: "k8guard-kafka-service.default.svc.cluster.local:9092"
+    k8guard-kafka-action-topic: "k8guard-to-action-k8s-lab"
+    cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
+    cassandra-keyspace: "k8guardkeyspace"
+    cassandra-username: "cassandra"
+    cassandra-ca-path: ""
+    cassandra-ssl-validation: "false"
+    k8guard-cassandra-create-keyspace: "true"
+    k8guard-cassandra-create-tables: "true"
+    smtp-server: ""
+    smtp-port: "25"
+    smtp-send-from: "DO_NOT_REPLY@REPLACE_WITH_DOMAIN.COM"
+    smtp-fallback-send-to: "REPLACE@REPLACE_WITH_DOMAIN.COM"
+    smtp-send-to-namespace-owner: "true"
+    action-safe-mode: "true"
+    action-dry-run: "false"
+    action-duration-between-chat-notifications: "30s"
+    action-warning-count-before_action: "4"
+    action-duration-between-notifying-again: "24h"
+    action-duration-violation-expires: "120h"
+    k8guard-action-violation-email-footer: ""
   deployment:
     replicas: 1
     image: local/k8guard-discover
@@ -87,8 +86,7 @@ report:
 ingress:
   enabled: false
   # Used to create Ingress record (should used with service.type: ClusterIP).
-  hosts:
-    - k8guard.domain.local
+  host: k8guard.domain.local
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
