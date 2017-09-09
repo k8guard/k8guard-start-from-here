@@ -86,8 +86,7 @@ report:
 ingress:
   enabled: false
   # Used to create Ingress record (should used with service.type: ClusterIP).
-  hosts:
-    - k8guard.domain.local
+  host: k8guard.domain.local
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
