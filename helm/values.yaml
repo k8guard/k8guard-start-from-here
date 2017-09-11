@@ -1,0 +1,97 @@
+action:
+  configmap:
+    cluster-name: "minikube"
+    hipchat-room-id: ""
+    hipchat-base-url: ""
+    hipchat-tag-namespace-owner: "true"
+    k8guard-log-level: "debug"
+    k8guard-kafka-brokers: "k8guard-kafka-service.default.svc.cluster.local:9092"
+    k8guard-kafka-action-topic: "k8guard-to-action-k8s-lab"
+    cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
+    cassandra-keyspace: "k8guardkeyspace"
+    cassandra-username: "cassandra"
+    cassandra-ca-path: ""
+    cassandra-ssl-validation: "false"
+    k8guard-cassandra-create-keyspace: "true"
+    k8guard-cassandra-create-tables: "true"
+    smtp-server: ""
+    smtp-port: "25"
+    smtp-send-from: "DO_NOT_REPLY@REPLACE_WITH_DOMAIN.COM"
+    smtp-fallback-send-to: "REPLACE@REPLACE_WITH_DOMAIN.COM"
+    smtp-send-to-namespace-owner: "true"
+    action-safe-mode: "true"
+    action-dry-run: "false"
+    action-duration-between-chat-notifications: "30s"
+    action-warning-count-before_action: "4"
+    action-duration-between-notifying-again: "24h"
+    action-duration-violation-expires: "120h"
+    k8guard-action-violation-email-footer: ""
+  deployment:
+    replicas: 1
+    image: local/k8guard-discover
+    imagePullPolicy: IfNotPresent
+discover:
+  configmap:
+    k8guard-namespace: ""
+    k8guard-cluster: "tte-test"
+    k8guard-approved-image-repos: "REPLACE_ME"
+    k8guard-approved-image-size: "800"
+    k8guard-ingress-must-contain: ""
+    k8guard-ingress-must-not-contain: ""
+    k8guard-approved-ingress-suffixes: ""
+    k8guard-ignore-namespaces: ""
+    k8guard-ignore-pods-prefix: ""
+    k8guard-ignore-deployments: ""
+    k8guard-ignore-violations: ""
+    k8guard-output-pods-to-file: "FALSE"
+    k8guard-cache-expiration-seconds: "300"
+    k8guard-http-cache-expire: "TRUE"
+    k8guard-memcahced-hostname: "k8guard-memcached-service.default.svc.cluster.local"
+    k8guard-log-level: "debug"
+    k8guard-kafka-brokers: "k8guard-kafka-service.default.svc.cluster.local:9092"
+    k8guard-kafka-action-topic: "k8guard-to-action-k8s-lab"
+  cronjob:
+    image: local/k8guard-discover
+    imagePullPolicy: IfNotPresent
+    schedule: "*/3 * * * *"
+  deployment:
+    replicas: 2
+    image: local/k8guard-action
+    imagePullPolicy: IfNotPresent
+  service:
+    port: 3000
+    annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path: '/metrics'
+report:
+  configmap:
+    k8guard-namespace: ""
+    k8guard-cluster: "minikube"
+    cassandra-username: "cassandra"
+    cassandra-ca-path: ""
+    cassandra-ssl-validation: "false"
+    cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
+    cassandra-keyspace: "k8guardkeyspace"
+  deployment:
+    replicas: 2
+    image: local/k8guard-report
+    imagePullPolicy: IfNotPresent
+    containerPort: 3001
+  secrets:
+    # passwords need to be base64, echo -n "cassandra" | base6
+    cassandra-password: "Y2Fzc2FuZHJh"
+  service:
+    port: 3001
+
+ingress:
+  enabled: false
+  # Used to create Ingress record (should used with service.type: ClusterIP).
+  host: k8guard.domain.local
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local

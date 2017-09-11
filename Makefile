@@ -177,6 +177,12 @@ deploy-minikube: build-local-dockers ## Builds all docker images from source and
 	kubectl apply -f minikube/discover-api
 	kubectl apply -f minikube/discover-cronjob
 
+clean-helm:
+	helm delete k8guard-chart
+
+deploy-helm:
+	helm upgrade -i k8guard-chart helm -f helm/values.yaml
+
 build-deploy-minikube: build-all deploy-minikube
 
 ####################################################################
@@ -203,8 +209,9 @@ deploy-minikube-lightweight: build-local-dockers ## Builds all docker images fro
 
 build-deploy-minikube-lightweight: build-all deploy-minikube-lightweight
 
+build-deploy-helm: build-all deploy-helm
 
-
+up-compose: up-core-compose up-action-compose-d up-discover-compose-d up-report-compose-d ## deploys all the microservices to dokcer-compose
 
 sup-compose: build-all up ## super up (Builds all and then deploys up all the microservices in docker-compose)
 

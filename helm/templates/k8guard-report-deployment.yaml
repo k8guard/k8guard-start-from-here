@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: k8guard-report-deployment
 spec:
-  replicas: 2
+  replicas: {{ .Values.report.deployment.replicas }}
   template:
     metadata:
       labels:
@@ -11,8 +11,8 @@ spec:
     spec:
       containers:
       - name: k8guard-report
-        image: local/k8guard-report
-        imagePullPolicy: Never
+        image: {{ .Values.report.deployment.image }}
+        imagePullPolicy: {{ .Values.report.deployment.imagePullPolicy }}
         resources:
           limits:
             cpu: 50m
@@ -62,15 +62,15 @@ spec:
                 name: k8guard-report-configmap
                 key: cassandra-ssl-validation
         ports:
-        - containerPort: 3001
+        - containerPort: {{ .Values.report.deployment.containerPort }}
         livenessProbe:
           httpGet:
             path: /alive
-            port: 3001
+            port: {{ .Values.report.deployment.containerPort }}
           initialDelaySeconds: 5
         readinessProbe:
           httpGet:
             path: /ready
-            port: 3001
+            port: {{ .Values.report.deployment.containerPort }}
           initialDelaySeconds: 10
           timeoutSeconds: 3
