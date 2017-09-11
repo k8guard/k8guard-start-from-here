@@ -1,0 +1,13 @@
+---
+services:
+  cassandra:
+    image: bitnami/cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: cassandra
+    
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+version: "2"

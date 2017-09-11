@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8guard-redis
+    spec:
+      containers:
+      - name: k8guard-redis
+        image: redis:alpine
+        ports:
+        - containerPort: 6379

@@ -1,0 +1,37 @@
+---
+services:
+  k8guard-discover-api:
+    build:
+      context: ../k8guard-discover/
+    networks:
+      - k8guardstartfromhere_default
+    external_links:
+      - k8guardstartfromhere_redis_1:redis
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+      - 3002:3002
+    volumes:
+      - ${HOME}/.kube:/root/.kube
+      # - ${HOME}/.minikube:${HOME}/.minikube # only if you want docker-compose k8guard to run against a minikube.
+  k8guard-discover-cron:
+    build:
+      context: ../k8guard-discover/
+      dockerfile: Dockerfile-local
+    networks:
+      - k8guardstartfromhere_default
+    env_file:
+      - .env
+    external_links:
+      - k8guardstartfromhere_redis_1:redis
+    volumes:
+      - ${HOME}/.kube:/root/.kube
+      - ${HOME}/.minikube:${HOME}/.minikube
+    command:
+      - -kmode
+version: "2"
+
+networks:
+  k8guardstartfromhere_default:
+    external: true

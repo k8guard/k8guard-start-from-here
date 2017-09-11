@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8guard-discover-configmap
+data:
+  k8guard-namespace: ""
+  k8guard-cluster: "tte-test"
+  k8guard-include-alpha: "FALSE"
+  k8guard-approved-image-repos: "REPLACE_ME"
+  k8guard-approved-image-size: "800"
+  k8guard-ingress-must-contain: ""
+  k8guard-ingress-must-not-contain: ""
+  k8guard-approved-ingress-suffixes: ""
+  k8guard-ignore-namespaces: ""
+  k8guard-ignore-pods-prefix: ""
+  k8guard-ignore-deployments: ""
+  k8guard-ignore-violations: ""
+  k8guard-required-annotations: ""
+  k8guard-required-labels: ""
+  k8guard-required-entities: ""
+  k8guard-output-pods-to-file: "FALSE"
+  k8guard-cache-expiration-seconds: "300"
+  k8guard-http-cache-expire: "TRUE"
+  k8guard-memcahced-hostname: "k8guard-memcached-service.default.svc.cluster.local"
+  k8guard-log-level: "debug"
+  k8guard-cache-type: "REDIS"
+  k8guard-message-broker: "RMQ"
+  k8guard-redis-broker: "redis:6379"
+  k8guard-redis-action-topic: "k8guard-to-action"

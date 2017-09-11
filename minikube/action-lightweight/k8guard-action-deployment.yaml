@@ -1,0 +1,175 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-action-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8guard-action
+    spec:
+      containers:
+      - name: k8guard-action
+        image: local/k8guard-action
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            memory: 10Mi
+        env:
+          - name: K8GUARD_CLUSTER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cluster-name
+          - name: K8GUARD_ACTION_CASSANDRA_HOSTS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-hosts
+          - name: K8GUARD_ACTION_CASSANDRA_KEYSPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-keyspace
+          - name: K8GUARD_ACTION_CASSANDRA_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-username
+          - name: K8GUARD_ACTION_CASSANDRA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: k8guard-action-secrets
+                key: cassandra-password
+          - name: K8GUARD_ACTION_CASSANDRA_CAPATH
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-ca-path
+          - name: K8GUARD_ACTION_CASSANDRA_SSL_HOST_VALIDATION
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: cassandra-ssl-validation
+          - name: K8GUARD_ACTION_SMTP_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: smtp-server
+          - name: K8GUARD_ACTION_SMTP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: smtp-port
+          - name: K8GUARD_ACTION_SMTP_SEND_FROM
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: smtp-send-from
+          - name: K8GUARD_ACTION_SMTP_FALLBACK_SEND_TO
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: smtp-fallback-send-to
+          - name: K8GUARD_ACTION_SMTP_SEND_TO_NAMESAPCE_OWNER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: smtp-send-to-namespace-owner
+          - name: K8GUARD_ACTION_SAFE_MODE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-safe-mode
+          - name: K8GUARD_ACTION_DRY_RUN
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-dry-run
+          - name: K8GUARD_ACTION_WARNING_COUNT_BEFORE_ACTION
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-warning-count-before_action
+          - name: K8GUARD_ACTION_DURATION_BETWEEN_CHAT_NOTIFICATIONS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-duration-between-chat-notifications
+          - name: K8GUARD_ACTION_DURATION_BETWEEN_NOTIFYING_AGAIN
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-duration-between-notifying-again
+          - name: K8GUARD_ACTION_DURATION_VIOLATION_EXPIRES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: action-duration-violation-expires
+          - name: K8GUARD_ACTION_HIPCHAT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: k8guard-action-secrets
+                key: hipchat-token
+          - name: K8GUARD_ACTION_HIPCHAT_ROOM_ID
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: hipchat-room-id
+          - name: K8GUARD_ACTION_HIPCHAT_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: hipchat-base-url
+          - name: K8GUARD_ACTION_HIPCHAT_TAG_NAMESPACE_OWNER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: hipchat-tag-namespace-owner
+          - name: K8GUARD_LOG_LEVEL
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-log-level
+
+          - name: K8GUARD_CACHE_TYPE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-cache-type
+          - name: K8GUARD_MESSAGE_BROKER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-message-broker
+          - name: K8GUARD_RMQ_BROKER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-rmq-broker
+          - name: K8GUARD_RMQ_ACTION_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-rmq-action-topic
+
+          - name: K8GUARD_CASSANDRA_CREATE_KEYSPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-cassandra-create-keyspace
+          - name: K8GUARD_CASSANDRA_CREATE_TABLES
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-cassandra-create-tables
+          - name: K8GUARD_ACTION_VIOLATION_EMAIL_FOOTER
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-action-configmap
+                key: k8guard-action-violation-email-footer

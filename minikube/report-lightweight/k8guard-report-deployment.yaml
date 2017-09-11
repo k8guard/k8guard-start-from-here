@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8guard-report-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: k8guard-report
+    spec:
+      containers:
+      - name: k8guard-report
+        image: local/k8guard-report
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            memory: 10Mi
+        env:
+          - name: K8GUARD_NAMESPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: k8guard-namespace
+          - name: K8GUARD_CLUSTER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: k8guard-cluster
+          - name: K8GUARD_ACTION_CASSANDRA_HOSTS
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: cassandra-hosts
+          - name: K8GUARD_ACTION_CASSANDRA_KEYSPACE
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: cassandra-keyspace
+          - name: K8GUARD_ACTION_CASSANDRA_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: cassandra-username
+          - name: K8GUARD_ACTION_CASSANDRA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: k8guard-report-secrets
+                key: cassandra-password
+          - name: K8GUARD_ACTION_CASSANDRA_CAPATH
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: cassandra-ca-path
+          - name: K8GUARD_ACTION_CASSANDRA_SSL_HOST_VALIDATION
+            valueFrom:
+              configMapKeyRef:
+                name: k8guard-report-configmap
+                key: cassandra-ssl-validation
+        ports:
+        - containerPort: 3001
