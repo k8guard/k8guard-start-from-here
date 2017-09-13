@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: k8guard-discover-deployment
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.discover.deployment.replicas }}
   template:

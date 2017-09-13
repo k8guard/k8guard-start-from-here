@@ -4,6 +4,7 @@ metadata:
   labels:
     name: k8guard-memcached-label
   name: k8guard-memcached-service
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
     # The port that this service should serve on.

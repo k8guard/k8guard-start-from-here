@@ -4,6 +4,7 @@ metadata:
   labels:
     name: k8guard-kafka-label
   name: k8guard-kafka-service
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
   - port: 2181
