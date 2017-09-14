@@ -97,3 +97,41 @@ ingress:
     # - secretName: chart-example-tls
     #   hosts:
     #     - chart-example.local
+
+# Optionally limit the resources used by the core services
+#cassandra:
+#  resources:
+#    requests:
+#      memory: "64Mi"
+#      cpu: "250m"
+#    limits:
+#      memory: "128Mi"
+#      cpu: "500m"
+#
+#memcached:
+#  resources:
+#    requests:
+#      memory: "64Mi"
+#      cpu: "250m"
+#    limits:
+#      memory: "128Mi"
+#      cpu: "500m"
+#
+#kafka:
+#  resources:
+#    requests:
+#      memory: "64Mi"
+#      cpu: "250m"
+#    limits:
+#      memory: "128Mi"
+#      cpu: "500m"
+#
+#zookeeper:
+#  resources:
+#    requests:
+#      memory: "64Mi"
+#      cpu: "250m"
+#    limits:
+#      memory: "128Mi"
+#      cpu: "500m"
+#

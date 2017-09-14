@@ -16,6 +16,10 @@ spec:
         # image: satlank/microzookeeper:3.4.9-1
         ports:
         - containerPort: 2181
+{{ if .Values.zookeeper.resources }}
+        resources:
+{{- end }}
+{{ toYaml .Values.zookeeper.resources | indent 10}}
       - name: kafka
         image: wurstmeister/kafka:0.10.2.1
         env:
@@ -29,3 +33,7 @@ spec:
             value: "k8guard-to-action-k8s-lab:1:1"
         ports:
         - containerPort: 9092
+{{ if .Values.kafka.resources }}
+        resources:
+{{- end }}
+{{ toYaml .Values.kafka.resources | indent 10 }}

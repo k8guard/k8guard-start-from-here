@@ -13,3 +13,7 @@ spec:
       containers:
       - name: k8guard-memcached
         image: memcached:alpine
+{{ if .Values.memcached.resources }}
+        resources:
+{{- end }}
+{{ toYaml .Values.memcached.resources | indent 10 }}
