@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: k8guard-report-deployment
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.report.deployment.replicas }}
   template:

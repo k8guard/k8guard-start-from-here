@@ -4,6 +4,7 @@ metadata:
   labels:
     name: k8guard-label
   name: k8guard-discover-service
+  namespace: {{ .Values.namespace }}
   annotations:
 {{ toYaml .Values.discover.service.annotations | indent 4 }}
 spec:

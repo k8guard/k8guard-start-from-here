@@ -1,3 +1,5 @@
+# All resources are installed into this namespace
+namespace: ""
 action:
   configmap:
     cluster-name: "minikube"
