@@ -1,0 +1,4 @@
+apiVersion: v1
+description: The lightweight k8guard helm chart.
+name: helm-lightweight
+version: 0.1.0

@@ -1,0 +1,8 @@
+
+{{- if .Values.ingress.hostname }}
+You can use the below URL to access the k8guard report and discover UIs:
+  http://{{- .Values.ingress.hostname }}/report
+  http://{{- .Values.ingress.hostname }}/discover
+{{- else }}
+Consider using an ingress to expose your report and discover services.
+{{- end }}
