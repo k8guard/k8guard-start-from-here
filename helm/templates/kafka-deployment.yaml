@@ -9,6 +9,9 @@ spec:
     metadata:
       labels:
         app: k8guard-kafka
+{{ if .Values.kafka.labels }}
+{{ toYaml .Values.kafka.labels | indent 8 }}
+{{ end }}
     spec:
       containers:
       - name: zookeeper
@@ -18,8 +21,8 @@ spec:
         - containerPort: 2181
 {{ if .Values.zookeeper.resources }}
         resources:
-{{- end }}
 {{ toYaml .Values.zookeeper.resources | indent 10}}
+{{- end }}
       - name: kafka
         image: wurstmeister/kafka:0.10.2.1
         env:
@@ -35,5 +38,5 @@ spec:
         - containerPort: 9092
 {{ if .Values.kafka.resources }}
         resources:
-{{- end }}
 {{ toYaml .Values.kafka.resources | indent 10 }}
+{{- end }}

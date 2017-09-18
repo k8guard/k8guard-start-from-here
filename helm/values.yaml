@@ -32,6 +32,7 @@ action:
     replicas: 1
     image: local/k8guard-discover
     imagePullPolicy: IfNotPresent
+    labels: {}
 discover:
   configmap:
     k8guard-namespace: ""
@@ -60,6 +61,7 @@ discover:
     replicas: 2
     image: local/k8guard-action
     imagePullPolicy: IfNotPresent
+    labels: {}
   service:
     port: 3000
     annotations:
@@ -79,6 +81,7 @@ report:
     image: local/k8guard-report
     imagePullPolicy: IfNotPresent
     containerPort: 3001
+    labels: {}
   secrets:
     # passwords need to be base64, echo -n "cassandra" | base6
     cassandra-password: "Y2Fzc2FuZHJh"
@@ -98,8 +101,11 @@ ingress:
     #   hosts:
     #     - chart-example.local
 
+
 # Optionally limit the resources used by the core services
-#cassandra:
+cassandra:
+  labels:
+    foo: "bar"
 #  resources:
 #    requests:
 #      memory: "64Mi"
@@ -108,7 +114,8 @@ ingress:
 #      memory: "128Mi"
 #      cpu: "500m"
 #
-#memcached:
+memcached:
+  labels: {}
 #  resources:
 #    requests:
 #      memory: "64Mi"
@@ -117,7 +124,8 @@ ingress:
 #      memory: "128Mi"
 #      cpu: "500m"
 #
-#kafka:
+kafka:
+  labels: {}
 #  resources:
 #    requests:
 #      memory: "64Mi"
@@ -126,7 +134,8 @@ ingress:
 #      memory: "128Mi"
 #      cpu: "500m"
 #
-#zookeeper:
+zookeeper:
+  labels: {}
 #  resources:
 #    requests:
 #      memory: "64Mi"

@@ -9,6 +9,9 @@ spec:
     metadata:
       labels:
         app: k8guard-cassandra
+{{ if .Values.cassandra.labels  }}
+{{ toYaml .Values.cassandra.labels | indent 8 }}
+{{ end }}
     spec:
       containers:
       - name: k8guard-cassandra
