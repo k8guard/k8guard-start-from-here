@@ -9,6 +9,9 @@ spec:
     metadata:
       labels:
         app: k8guard-memcached
+{{ if .Values.memcached.labels }}
+{{- toYaml .Values.memcached.labels | indent 8 }}
+{{ end }}
     spec:
       containers:
       - name: k8guard-memcached

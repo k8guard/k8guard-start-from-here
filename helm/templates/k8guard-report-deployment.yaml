@@ -9,6 +9,9 @@ spec:
     metadata:
       labels:
         app: k8guard-report
+{{ if .Values.report.deployment.labels }}
+{{- toYaml .Values.report.deployment.labels | indent 8 }}
+{{ end }}
     spec:
       containers:
       - name: k8guard-report
