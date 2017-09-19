@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: k8guard-redis-label
+  name: k8guard-redis-service
+spec:
+  ports:
+    # The port that this service should serve on.
+    - port: 6379
+
+  # Label keys and values that must match in order to receive traffic for this service.
+  selector:
+     app: k8guard-redis

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8guard-action-configmap
+  namespace: {{ .Values.namespace }}
+data:
+{{ toYaml .Values.action.configmap | indent 2 }}
