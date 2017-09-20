@@ -35,7 +35,7 @@ action:
     image: local/k8guard-discover
     imagePullPolicy: IfNotPresent
   secrets:
-    # passwords need to be base64, echo -n "cassandra" | base6
+    # passwords need to be base64, echo -n "cassandra" | base64
     cassandra-password: "Y2Fzc2FuZHJh"
     hipchat-token: ""
 discover:
@@ -92,7 +92,7 @@ report:
     imagePullPolicy: IfNotPresent
     containerPort: 3001
   secrets:
-    # passwords need to be base64, echo -n "cassandra" | base6
+    # passwords need to be base64, echo -n "cassandra" | base64
     cassandra-password: "Y2Fzc2FuZHJh"
   service:
     port: 3001
