@@ -5,6 +5,7 @@ developer-setup: setup-source create-pre-commit-hooks ## Run this only once. Dow
 
 setup-source:
 	echo "Installing glide"
+	mkdir $(GOPATH)/bin
 	curl https://glide.sh/get | sh
 	echo "Installing goimports"
 	go get golang.org/x/tools/cmd/goimports
