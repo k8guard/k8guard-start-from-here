@@ -33,6 +33,10 @@ action:
     image: local/k8guard-discover
     imagePullPolicy: IfNotPresent
     labels: {}
+  secrets:
+    # passwords need to be base64, echo -n "cassandra" | base6
+    cassandra-password: "Y2Fzc2FuZHJh"
+    hipchat-token: ""
 discover:
   configmap:
     k8guard-namespace: ""

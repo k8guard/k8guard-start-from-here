@@ -9,7 +9,7 @@ action:
     k8guard-log-level: "debug"
     k8guard-cache-type: "REDIS"
     k8guard-message-broker: "RMQ"
-    k8guard-rmq-broker: "redis:6379"
+    k8guard-rmq-broker: "k8guard-redis-service:6379"
     k8guard-rmq-action-topic: "k8guard-to-action"
     cassandra-hosts: "k8guard-cassandra-service.default.svc.cluster.local:9042"
     cassandra-keyspace: "k8guardkeyspace"
@@ -34,6 +34,10 @@ action:
     replicas: 1
     image: local/k8guard-discover
     imagePullPolicy: IfNotPresent
+  secrets:
+    # passwords need to be base64, echo -n "cassandra" | base64
+    cassandra-password: "Y2Fzc2FuZHJh"
+    hipchat-token: ""
 discover:
   configmap:
     k8guard-namespace: ""
@@ -58,7 +62,7 @@ discover:
     k8guard-log-level: "debug"
     k8guard-cache-type: "REDIS"
     k8guard-message-broker: "RMQ"
-    k8guard-redis-broker: "redis:6379"
+    k8guard-redis-broker: "k8guard-redis-service:6379"
     k8guard-redis-action-topic: "k8guard-to-action"
   cronjob:
     image: local/k8guard-discover
@@ -88,7 +92,7 @@ report:
     imagePullPolicy: IfNotPresent
     containerPort: 3001
   secrets:
-    # passwords need to be base64, echo -n "cassandra" | base6
+    # passwords need to be base64, echo -n "cassandra" | base64
     cassandra-password: "Y2Fzc2FuZHJh"
   service:
     port: 3001
